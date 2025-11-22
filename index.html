@@ -7,6 +7,9 @@
 </head>
 <body>
     <script>
+        
+       
+
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
@@ -22,8 +25,50 @@
             
         }
 
-        console.log(getComputerChoice())
+         function getHumanChoice() {
+            return window.prompt("Select your move: Rock, Paper, Scissors")
+        }
 
+                       
+        function playRound(computerChoice , humanChoice) {
+            if (computerChoice == "paper" && humanChoice == "scissors")
+                return console.log("The computer selected paper, you win!")
+                humanScore++
+            if (computerChoice == "rock" && humanChoice == "paper")
+                return console.log("The computer selected rock, you win!")
+                humanScore++
+            if (computerChoice == "scissors" && humanChoice == "rock")
+                return console.log("The computer selected scissors, you win!")
+                humanScore++
+            if (computerChoice == "paper" && humanChoice == "rock")
+                return console.log("The computer selected paper, you lose!")
+                computerScore++
+            if (computerChoice == "rock" && humanChoice == "scissors")
+                return console.log("The computer selected rock, you lose!")
+                computerScore++
+            if (computerChoice == "scissors" && humanChoice == "paper")
+                return console.log("The computer selected scissor, You lose!")
+                computerScore++
+            if (computerChoice == "paper" && humanChoice == "paper")
+                return console.log("The computer selected the same as you, it's a tie!")
+                
+            if (ComputerChoice == "rock" && humanChoice == "rock")
+                return console.log("The computer selected the same as you, it's a tie!")
+                
+            if (ComputerChoice == "scissors" && humanChoice == "scissors")
+                return console.log("The computer selected the same as you, it's a tie!")
+                
+        }
+
+       let humanSelection = getHumanChoice();
+       let computerSelection = getComputerChoice();
+       let humanScore = 0;
+       let computerScore = 0;
+       
+
+       playRound(computerSelection,humanSelection.toLowerCase());
+       console.log(humanSelection);
+        
        
 
     </script>
