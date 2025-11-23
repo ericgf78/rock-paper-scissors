@@ -7,8 +7,7 @@
 </head>
 <body>
     <script>
-        
-       
+    
         let humanScore = 0;
         let computerScore = 0;
         let computerWins = false;
@@ -85,9 +84,9 @@
 
         function playGame() {
             for (let i = 0; i < 5; i++) {
-            let humanSelection = getHumanChoice();
-            let computerSelection = getComputerChoice();
-            playRound(computerSelection,humanSelection.toLowerCase());
+                let humanSelection = getHumanChoice();
+                let computerSelection = getComputerChoice();
+                playRound(computerSelection,humanSelection.toLowerCase());
             if (humanWins == true) {
                 humanScore++;
                 humanWins = false;
@@ -109,16 +108,8 @@
             console.log("It's a tie!")
         else {
             console.log("You lost! better luck next time...")
-        }
-       
+        }  
         
-       
-        
-        
-        
-        
-       
-
     </script>
 </body>
 </html>
