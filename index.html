@@ -9,6 +9,11 @@
     <script>
         
        
+        let humanScore = 0;
+        let computerScore = 0;
+        let computerWins = false;
+        let humanWins = false;
+        
 
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
@@ -31,43 +36,86 @@
 
                        
         function playRound(computerChoice , humanChoice) {
-            if (computerChoice == "paper" && humanChoice == "scissors")
-                return console.log("The computer selected paper, you win!")
-                humanScore++
-            if (computerChoice == "rock" && humanChoice == "paper")
-                return console.log("The computer selected rock, you win!")
-                humanScore++
-            if (computerChoice == "scissors" && humanChoice == "rock")
-                return console.log("The computer selected scissors, you win!")
-                humanScore++
-            if (computerChoice == "paper" && humanChoice == "rock")
-                return console.log("The computer selected paper, you lose!")
-                computerScore++
-            if (computerChoice == "rock" && humanChoice == "scissors")
-                return console.log("The computer selected rock, you lose!")
-                computerScore++
-            if (computerChoice == "scissors" && humanChoice == "paper")
-                return console.log("The computer selected scissor, You lose!")
-                computerScore++
-            if (computerChoice == "paper" && humanChoice == "paper")
-                return console.log("The computer selected the same as you, it's a tie!")
+            
+            if (computerChoice == "paper" && humanChoice == "scissors") {
+                 humanWins = true; 
+                 console.log("The computer selected paper, you win!")
                 
-            if (ComputerChoice == "rock" && humanChoice == "rock")
-                return console.log("The computer selected the same as you, it's a tie!")
+            }
+            if (computerChoice == "rock" && humanChoice == "paper") {
+                humanWins = true;  
+                console.log("The computer selected rock, you win!")
                 
-            if (ComputerChoice == "scissors" && humanChoice == "scissors")
-                return console.log("The computer selected the same as you, it's a tie!")
+            }
+            if (computerChoice == "scissors" && humanChoice == "rock") {
+                humanWins = true;  
+                console.log("The computer selected scissors, you win!")
+                
+            }
+            if (computerChoice == "paper" && humanChoice == "rock") {
+                computerWins = true;  
+                console.log("The computer selected paper, you lose!")
+                
+            }
+            if (computerChoice == "rock" && humanChoice == "scissors") {
+                computerWins = true; 
+                console.log("The computer selected rock, you lose!")
+               
+            }
+            if (computerChoice == "scissors" && humanChoice == "paper") {
+                computerWins = true; 
+                console.log("The computer selected scissor, You lose!")
+                
+            }    
+            if (computerChoice == "paper" && humanChoice == "paper") {
+                return console.log("The computer also selected paper, it's a tie!")
+            }
+                
+            if (computerChoice == "rock" && humanChoice == "rock") {
+                return console.log("The computer also selected rock, it's a tie!")
+            }
+                
+            if (computerChoice == "scissors" && humanChoice == "scissors") {
+                return console.log("The computer also selected scissors, it's a tie!")
+            }
+
+                
                 
         }
 
-       let humanSelection = getHumanChoice();
-       let computerSelection = getComputerChoice();
-       let humanScore = 0;
-       let computerScore = 0;
-       
+        function playGame() {
+            for (let i = 0; i < 5; i++) {
+            let humanSelection = getHumanChoice();
+            let computerSelection = getComputerChoice();
+            playRound(computerSelection,humanSelection.toLowerCase());
+            if (humanWins == true) {
+                humanScore++;
+                humanWins = false;
+            }
+            if (computerWins == true) {
+                computerScore++;
+                computerWins = false;
+            }
+            
+            console.log("Your score is: "+ humanScore + ", the computer score is: " + computerScore);
+            }
+        }
 
-       playRound(computerSelection,humanSelection.toLowerCase());
-       console.log(humanSelection);
+        playGame()
+        if (humanScore > computerScore) {
+            console.log("Congratulations, you win!")
+        }
+        if (humanScore == computerScore)
+            console.log("It's a tie!")
+        else {
+            console.log("You lost! better luck next time...")
+        }
+       
+        
+       
+        
+        
+        
         
        
 
