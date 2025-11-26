@@ -4,112 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissor</title>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script>
-    
-        let humanScore = 0;
-        let computerScore = 0;
-        let computerWins = false;
-        let humanWins = false;
-        
-
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
-        
-        function getComputerChoice(randomNumber) {
-           randomNumber = getRandomInt(3)
-            if (randomNumber == 0)
-                 return  "rock"
-             if (randomNumber == 1)
-                 return  "paper"
-            else
-                 return "scissors"
-            
-        }
-
-         function getHumanChoice() {
-            return window.prompt("Select your move: Rock, Paper, Scissors")
-        }
-
-                       
-        function playRound(computerChoice , humanChoice) {
-            
-            if (computerChoice == "paper" && humanChoice == "scissors") {
-                 humanWins = true; 
-                 console.log("The computer selected paper, you win!")
-                
-            }
-            if (computerChoice == "rock" && humanChoice == "paper") {
-                humanWins = true;  
-                console.log("The computer selected rock, you win!")
-                
-            }
-            if (computerChoice == "scissors" && humanChoice == "rock") {
-                humanWins = true;  
-                console.log("The computer selected scissors, you win!")
-                
-            }
-            if (computerChoice == "paper" && humanChoice == "rock") {
-                computerWins = true;  
-                console.log("The computer selected paper, you lose!")
-                
-            }
-            if (computerChoice == "rock" && humanChoice == "scissors") {
-                computerWins = true; 
-                console.log("The computer selected rock, you lose!")
-               
-            }
-            if (computerChoice == "scissors" && humanChoice == "paper") {
-                computerWins = true; 
-                console.log("The computer selected scissor, You lose!")
-                
-            }    
-            if (computerChoice == "paper" && humanChoice == "paper") {
-                return console.log("The computer also selected paper, it's a tie!")
-            }
-                
-            if (computerChoice == "rock" && humanChoice == "rock") {
-                return console.log("The computer also selected rock, it's a tie!")
-            }
-                
-            if (computerChoice == "scissors" && humanChoice == "scissors") {
-                return console.log("The computer also selected scissors, it's a tie!")
-            }
-
-                
-                
-        }
-
-        function playGame() {
-            for (let i = 0; i < 5; i++) {
-                let humanSelection = getHumanChoice();
-                let computerSelection = getComputerChoice();
-                playRound(computerSelection,humanSelection.toLowerCase());
-            if (humanWins == true) {
-                humanScore++;
-                humanWins = false;
-            }
-            if (computerWins == true) {
-                computerScore++;
-                computerWins = false;
-            }
-            
-            console.log("Your score is: "+ humanScore + ", the computer score is: " + computerScore);
-            }
-        }
-
-        playGame()
-        if (humanScore > computerScore) {
-            console.log("Congratulations, you win!")
-        }
-        if (humanScore == computerScore)
-            console.log("It's a tie!")
-        else {
-            console.log("You lost! better luck next time...")
-        }  
-        
-    </script>
+    <div id="border" >
+        <div class="ui">
+            <div class="header">
+                <div>ROCK, PAPER, SCISSORS!</div>
+            </div>
+            <div id="computerVisual"></div>
+            <div class="points">
+                <div class=point></div>
+                <div class=point></div>
+                <div class=point></div>
+                <div class=point></div>
+                <div class=point></div>
+            </div>
+            <div class="buttons">
+                <div id="rock"><img src="./images/Rock.png" alt="Rock"></div>
+                <div id="paper"><img src="./images/Paper.png" alt="Paper"></div>
+                <div id="scissors"><img src="./images/Scissors.png" alt="Scissors"></div>
+            </div>
+        </div>
+    </div>
+  
 </body>
 </html>
