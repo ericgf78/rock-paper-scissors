@@ -1,7 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
 let computerWins = false;
-let humanWins = false;
+let winner = null;
 let move1 = document.querySelector("#rock");
 let move2 = document.querySelector("#paper");
 let move3 = document.querySelector("#scissors");
@@ -9,6 +9,9 @@ let points = document.querySelector("#points");
 let body = document.querySelector("body");
 let computerVisual = document.querySelector("#computerVisual");
 const callBlocker = document.createElement("div");
+let gameEnd = false;
+let pointArray = Array.from(points.children);
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -27,6 +30,7 @@ function callScreenBlocker() { // need to fix the size.
     callBlocker.style.opacity = "0";
     callBlocker.style.height = "100vh";
     callBlocker.style.width = "100vh";
+    callBlocker.style.padding = "150px";
 }
 
 function playRound(humanChoice) {
@@ -35,7 +39,7 @@ function playRound(humanChoice) {
   let iconWidth = 200;
 
   if (computerChoice == "paper" && humanChoice == "scissors") {
-    humanWins = true;
+    winner = "human";
     console.log("The computer selected paper, you win!");
     const iconVisual = document.createElement("img");
     iconVisual.src = "./images/Paper.png";
@@ -65,9 +69,10 @@ function playRound(humanChoice) {
     setTimeout(() => {
       callBlocker.remove();
     }, 1600);
+    return winner
   }
   if (computerChoice == "rock" && humanChoice == "paper") {
-    humanWins = true;
+    winner = "human";
     console.log("The computer selected rock, you win!");
     const iconVisual = document.createElement("img");
     iconVisual.src = "./images/Rock.png";
@@ -97,9 +102,10 @@ function playRound(humanChoice) {
     setTimeout(() => {
       callBlocker.remove();
     }, 1600);
+    return winner
   }
   if (computerChoice == "scissors" && humanChoice == "rock") {
-    humanWins = true;
+    winner = "human";
     console.log("The computer selected scissors, you win!");
     const iconVisual = document.createElement("img");
     iconVisual.src = "./images/Scissors.png";
@@ -129,9 +135,10 @@ function playRound(humanChoice) {
     setTimeout(() => {
       callBlocker.remove();
     }, 1600);
+    return winner
   }
   if (computerChoice == "paper" && humanChoice == "rock") {
-    computerWins = true;
+    winner = "computer";
     console.log("The computer selected paper, you lose!");
     const iconVisual = document.createElement("img");
     iconVisual.src = "./images/Paper.png";
@@ -161,9 +168,10 @@ function playRound(humanChoice) {
     setTimeout(() => {
       callBlocker.remove();
     }, 1600);
+    return winner
   }
   if (computerChoice == "rock" && humanChoice == "scissors") {
-    computerWins = true;
+    winner = "computer";
     console.log("The computer selected rock, you lose!");
     const iconVisual = document.createElement("img");
     iconVisual.src = "./images/Rock.png";
@@ -193,9 +201,10 @@ function playRound(humanChoice) {
     setTimeout(() => {
       callBlocker.remove();
     }, 1600);
+    return winner
   }
   if (computerChoice == "scissors" && humanChoice == "paper") {
-    computerWins = true;
+    winner = "computer";
     console.log("The computer selected scissor, You lose!");
     const iconVisual = document.createElement("img");
     iconVisual.src = "./images/Scissors.png";
@@ -225,6 +234,7 @@ function playRound(humanChoice) {
     setTimeout(() => {
       callBlocker.remove();
     }, 1600);
+    return winner
   }
   if (computerChoice == "paper" && humanChoice == "paper") {
     console.log("The computer also selected paper, it's a tie!");
@@ -324,9 +334,9 @@ function playRound(humanChoice) {
 }
 
 function playGame() {
-  if (humanWins == true) {
+  if (winner == true) {
     humanScore++;
-    humanWins = false;
+    winner = false;
   }
   if (computerWins == true) {
     computerScore++;
@@ -348,8 +358,38 @@ function playGame() {
 //    console.log("You lost! better luck next time...")
 // }
 
-move1.addEventListener("click", () => playRound("rock"));
-move2.addEventListener("click", () => playRound("paper"));
-move3.addEventListener("click", () => playRound("scissors"));
+let i = 0;
 
+move1.addEventListener("click", () => {winner = playRound("rock")
+    updateScore();
+});
+move2.addEventListener("click", () => {winner = playRound("paper")
+    updateScore();
+});
+move3.addEventListener("click", () => {winner = playRound("scissors")
+    updateScore();
+});
+
+
+function updateScore() {  
+    if (winner == "human") {
+        pointArray[i].style.backgroundColor = "#72B0AB";
+        i++
+        humanScore++
+    }   
+    if (winner == "computer") {
+        pointArray[i].style.backgroundColor = "#FE9179";
+        i++
+        computerScore++    
+    }
+    if (humanScore == 3) {
+        console.log("you win!");
+    }
+    if (computerScore == 3) {
+        console.log("you lost!");
+    }
+
+}
+
+    
 
