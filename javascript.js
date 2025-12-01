@@ -11,6 +11,7 @@ let computerVisual = document.querySelector("#computerVisual");
 const callBlocker = document.createElement("div");
 let gameEnd = false;
 let pointArray = Array.from(points.children);
+let wordSize = "50px";
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -23,7 +24,7 @@ function getComputerChoice(randomNumber) {
   else return "scissors";
 }
 
-function callScreenBlocker() { // need to fix the size. 
+function callScreenBlocker() { 
     body.appendChild(callBlocker);
     callBlocker.style.position = "fixed";
     callBlocker.style.backgroundColor = "#ffffff";
@@ -33,9 +34,10 @@ function callScreenBlocker() { // need to fix the size.
     callBlocker.style.padding = "150px";
 }
 
+
 function playRound(humanChoice) {
   let computerChoice = getComputerChoice();
-  let wordSize = "50px";
+  
   let iconWidth = 200;
 
   if (computerChoice == "paper" && humanChoice == "scissors") {
@@ -348,27 +350,27 @@ function playGame() {
   );
 }
 
-//playGame()
-// if (humanScore > computerScore) {
-//    console.log("Congratulations, you win!")
-// }
-// if (humanScore == computerScore)
-//    console.log("It's a tie!")
-// else {
-//    console.log("You lost! better luck next time...")
-// }
 
 let i = 0;
 
 move1.addEventListener("click", () => {winner = playRound("rock")
-    updateScore();
+    setTimeout(() => {updateScore();}, 1600);
 });
 move2.addEventListener("click", () => {winner = playRound("paper")
-    updateScore();
+    setTimeout(() => {updateScore();}, 1600);
 });
 move3.addEventListener("click", () => {winner = playRound("scissors")
-    updateScore();
+    setTimeout(() => {updateScore();}, 1600);
 });
+
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
+    for (i = 0; i < pointArray.length; i++) {
+        pointArray[i].style.backgroundColor = "rgb(221, 221, 221)";
+    }
+    i = 0;
+}
 
 
 function updateScore() {  
@@ -384,9 +386,52 @@ function updateScore() {
     }
     if (humanScore == 3) {
         console.log("you win!");
+        callScreenBlocker();
+        const resultMsg = document.createElement("p"); 
+        setTimeout(() => {
+        computerVisual.appendChild(resultMsg);
+        }, 300);   
+        resultMsg.textContent = "Congratulations, you won!"
+        resultMsg.style.textAlign = "center";
+        resultMsg.style.color = "#72B0AB";
+        resultMsg.style.fontSize = wordSize;
+        resultMsg.style.fontFamily = "Roboto";
+        resultMsg.style.margin = "0px";
+        setTimeout(() => {
+        resultMsg.remove();
+        }, 800);
+        setTimeout(() => {
+        callBlocker.remove();
+        }, 1000);
+        setTimeout(() => {
+        resetGame();
+        }, 1800);
+
+        
     }
     if (computerScore == 3) {
         console.log("you lost!");
+        callScreenBlocker();
+        const resultMsg = document.createElement("p"); 
+        setTimeout(() => {
+        computerVisual.appendChild(resultMsg);
+        }, 300);
+        resultMsg.textContent = "Too bad, you lost!"
+        resultMsg.style.textAlign = "center";
+        resultMsg.style.color = "#FE9179";
+        resultMsg.style.fontSize = wordSize;
+        resultMsg.style.fontFamily = "Roboto";
+        resultMsg.style.margin = "0px";
+        setTimeout(() => {
+        resultMsg.remove();
+        }, 1000);
+        setTimeout(() => {
+        callBlocker.remove();
+        }, 1800);
+         setTimeout(() => {
+        resetGame();
+        }, 1800);
+        
     }
 
 }
